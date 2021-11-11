@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-service
+  labels:
+    app: data-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-service
+  template:
+    metadata:
+      labels:
+        app: data-service
+    spec:
+      containers:
+      - name: data-service
+        image: local/data-service
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Never
+        env:
+          - name: MYSQL_HOST
+            value: mysqldb
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: data-service
+  name: data-service
+spec:
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: data-service
+status:
+  loadBalancer: {}
