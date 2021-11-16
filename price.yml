@@ -16,10 +16,9 @@ spec:
     spec:
       containers:
       - name: price-service
-        image: local/price-service
+        image: amodgupta/polydemo:price-service
         ports:
         - containerPort: 5000
-        imagePullPolicy: Never
 
 ---
 

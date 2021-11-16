@@ -16,10 +16,9 @@ spec:
     spec:
       containers:
       - name: data-service
-        image: local/data-service
+        image: amodgupta/polydemo:data-service
         ports:
         - containerPort: 8080
-        imagePullPolicy: Never
         env:
           - name: MYSQL_HOST
             value: mysqldb
